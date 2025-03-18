@@ -24,6 +24,7 @@ class searchHotel : AppCompatActivity() {
     private lateinit var hotelAdapter: HotelAdapter
     private var hotelList: List<Hotel> = listOf()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.city_search_hotel)
@@ -31,6 +32,7 @@ class searchHotel : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         searchView = findViewById(R.id.searchView)
         recyclerView.layoutManager = LinearLayoutManager(this)
+        searchView.setQueryHint("Enter City/Location/Hotel Name")
 
         fetchHotels()
 

@@ -54,6 +54,7 @@ class HotelAdapter(
                 val intent = Intent(context, MainActivity::class.java).apply {
                     putExtra("city", hotel.City)
                     putExtra("country", hotel.CountryName)
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 }
 
                 context.startActivity(intent)
@@ -63,37 +64,3 @@ class HotelAdapter(
         }
     }
 }
-//
-//import android.view.LayoutInflater
-//import android.view.View
-//import android.view.ViewGroup
-//import android.widget.TextView
-//import androidx.recyclerview.widget.RecyclerView
-//import com.justpe.apicall.City
-//import com.justpe.apicall.R
-//
-//class CityAdapter(private val cityList: List<City>) :
-//    RecyclerView.Adapter<CityAdapter.CityViewHolder>() {
-//
-//    class CityViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-//        val cityName: TextView = view.findViewById(R.id.cityName)
-//        val countryName: TextView = view.findViewById(R.id.countryName)
-//        val countryCode: TextView = view.findViewById(R.id.countryCode)
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CityViewHolder {
-//        val view = LayoutInflater.from(parent.context)
-//            .inflate(R.layout.item_city, parent, false)
-//        return CityViewHolder(view)
-//    }
-//
-//    override fun onBindViewHolder(holder: CityViewHolder, position: Int) {
-//        val city = cityList[position]
-//        holder.cityName.text = city.City
-//        holder.countryName.text = city.CountryName
-//        holder.countryCode.text = "Code: ${city.country}"
-//    }
-//
-//    override fun getItemCount(): Int = cityList.size
-//}
-//
