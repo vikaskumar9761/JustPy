@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules xmlns:tools="http://schemas.android.com/tools">
+    <cloud-backup>
+        <include tools:ignore="FullBackupContent">
+            <pattern>.*</pattern>
+        </include>
+    </cloud-backup>
+</data-extraction-rules>
