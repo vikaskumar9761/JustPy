@@ -108,4 +108,5 @@
     <string name="aadhar_lbl_txt">Please Verify Aadhar As Per KYC Guidelines</string>
     <string name="enter_aadhar">Enter Aadhar Number</string>
     <string name="aadhar_note"> Note : Dear Customer , as per KYC Guidelines Aadhar KYC is Mandatory . We ask Aadhar KYC as its required to use our services. We store last 4 digits of adhar number </string>
+    <string name="back">back</string>
 </resources>

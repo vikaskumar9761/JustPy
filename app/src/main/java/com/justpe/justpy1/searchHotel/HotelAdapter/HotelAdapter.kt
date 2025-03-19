@@ -12,7 +12,7 @@ import com.justpe.justpy1.searchHotel.dataApi.Hotel
 import com.justpe.justpy1.MainActivity
 
 class HotelAdapter(
-    private var hotelList: List<Hotel>,
+    private var hotelList: MutableList<Hotel>,
     private val context: Context // Context click Listener
 ) : RecyclerView.Adapter<HotelAdapter.HotelViewHolder>() {
 
@@ -30,14 +30,12 @@ class HotelAdapter(
 
     override fun getItemCount(): Int = filteredList.size
 
-    fun filterList(query: String) {
-        filteredList = if (query.isEmpty()) {
-            hotelList
-        } else {
-            hotelList.filter { it.City.contains(query, ignoreCase = true) }
-        }
+    fun updateList(newList: List<Hotel>) {
+        hotelList.clear()
+        hotelList.addAll(newList)
         notifyDataSetChanged()
     }
+
 
     class HotelViewHolder(itemView: View, private val context: Context)
         : RecyclerView.ViewHolder(itemView) {
