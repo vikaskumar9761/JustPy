@@ -1,60 +1,89 @@
-package com.justpe.justpy1.city_search_hotel.adapter
-
+package com.justpe.justpy1.city_search_hotel.HotelAdapter
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.denzcoskun.imageslider.ImageSlider
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
+import com.justpe.justpy1.HotelDetailScreen.HotelDetails
 import com.justpe.justpy1.R
-import com.justpe.justpy1.city_search_hotel.dataApi.hotelListData
+import com.justpe.justpy1.city_search_hotel.HotelModel.hotelListModel
+import com.justpe.justpy1.databinding.ItemHotelBinding
+import java.util.ArrayList
 
 // Adapter for displaying a list of hotels in a RecyclerView
 class HotelListAdapter(
-    private var hotelList: List<hotelListData.HotelData> // List of hotels to display
+    private var hotelList: List<hotelListModel.HotelData>,
+    private val context: Context // List of hotels to display
 ) : RecyclerView.Adapter<HotelListAdapter.HotelViewHolder>() {
 
-    // Creates ViewHolder for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_hotel, parent, false)
-        return HotelViewHolder(view)
+        val binding = ItemHotelBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return HotelViewHolder(binding,context)
     }
 
-    // Binds hotel data to the ViewHolder at the given position
     override fun onBindViewHolder(holder: HotelViewHolder, position: Int) {
         val hotel = hotelList[position]
         holder.bind(hotel) // Call bind function to set data
     }
 
-    // Returns the total number of hotels in the list
     override fun getItemCount(): Int = hotelList.size
 
-    // Updates the hotel list when new data is available
-    fun updateList(newList: List<hotelListData.HotelData>) {
+    fun updateList(newList: List<hotelListModel.HotelData>) {
         hotelList = newList  // Replace the old list with the new one
-        notifyDataSetChanged() // Refresh the RecyclerView
+        this.notifyDataSetChanged() // Refresh the RecyclerView
     }
 
-    // ViewHolder class for each hotel item in the RecyclerView
-    class HotelViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val hotelImage: ImageView = itemView.findViewById(R.id.viewPagerImages) // Hotel ImageView
-        private val hotelName: TextView = itemView.findViewById(R.id.tvHotelName) // Hotel Name TextView
-        private val hotelLocation: TextView = itemView.findViewById(R.id.tvLocation) // Hotel Location TextView
-        private val hotelAddress: TextView = itemView.findViewById(R.id.tvAddress) // Hotel Address TextView
+    class HotelViewHolder(private val binding: ItemHotelBinding, private val context: Context)
+        : RecyclerView.ViewHolder(binding.root) {
 
-        // Binds hotel data to the ViewHolder
-        fun bind(hotel: hotelListData.HotelData) {
-            hotelName.text = hotel.hotelName // Set hotel name
-            hotelLocation.text = hotel.Location ?: "Location not available" // Set location with fallback
-            hotelAddress.text = hotel.address // Set address
 
-            // Load hotel image using Glide
-            Glide.with(itemView.context)
-                .load(hotel.ImageThumbUrl) // Load image URL
-                .placeholder(R.drawable.loader_img) // Placeholder while loading
-                .error(R.drawable.img_alert_triangle) // Default image if loading fails
-                .into(hotelImage) // Load into ImageView
+        fun bind(hotel: hotelListModel.HotelData) {
+            binding.tvHotelName.text = hotel.hotelName
+            binding.tvLocation.text = hotel.Location ?: "Location not available"
+            binding.tvAddress.text = hotel.address
+            binding.tvRating.text = hotel.rating
+            binding.starRating.text = hotel.rating
+            binding.tvPrice.text = hotel.TotalPrice
+
+            // Change rating text color based on value
+            val rating = hotel.rating.toDoubleOrNull() ?: 0.0
+            val (colorRes, imageRes) = when {
+                rating >= 6.0 -> Pair(R.color.green_600, R.drawable.full_rating_img)
+                rating >= 4.0 -> Pair(R.color.green_600, R.drawable.full_rating_img)
+                rating >= 2.0 -> Pair(R.color.yellow_500, R.drawable.rating_img)
+                else -> Pair(R.color.red_600, android.R.drawable.star_big_on)
+            }
+
+            binding.tvRating.setTextColor(ContextCompat.getColor(binding.root.context, colorRes))
+            binding.ivRatingStar.setImageResource(imageRes)
+
+            // ✅ ImageSlider Setup
+            val imageUrl = hotel.ImageThumbUrl?.takeIf { it.isNotBlank() }
+                ?: "https://your-default-image-url.com/default.jpg" // ✅ Default Image
+
+            val imageUrls = List(3) { imageUrl } // ✅ 3 बार same image add की गई
+
+            val imageSlider: ImageSlider = binding.imageSlide
+            val slideModels = imageUrls.map { SlideModel(it, ScaleTypes.FIT) }
+            imageSlider.setImageList(slideModels)
+            imageSlider.startSliding(3000)
+            // Set click listener
+            binding.root.setOnClickListener {
+                val intent = Intent(context, HotelDetails::class.java).apply {
+                    putExtra("hotelName", hotel.hotelName)
+                    putExtra("location", hotel.Location)
+                    putExtra("address", hotel.address)
+                    putExtra("rating", hotel.rating)
+                    putExtra("price", hotel.TotalPrice)
+                    putStringArrayListExtra("imageUrls", ArrayList(imageUrls))                }
+                context.startActivity(intent)
+            }
+
         }
     }
 }
+

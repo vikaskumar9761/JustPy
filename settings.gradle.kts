@@ -15,10 +15,12 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral()
+        mavenCentral();
+        maven("https://jitpack.io")
     }
 }
 
 rootProject.name = "JustPy1"
 include(":app")
- 
+
+

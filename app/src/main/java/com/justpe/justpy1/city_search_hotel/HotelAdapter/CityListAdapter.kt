@@ -9,16 +9,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.justpe.justpy1.R
-import com.justpe.justpy1.city_search_hotel.dataApi.Hotel
+import com.justpe.justpy1.city_search_hotel.HotelModel.CityListModel
 import com.justpe.justpy1.MainActivity
 
 // RecyclerView Adapter for displaying a list of hotels
-class HotelAdapter(
-    private var hotelList: MutableList<Hotel>, // Original hotel list
+class CityListAdapter(
+    private var hotelList: MutableList<CityListModel>, // Original hotel list
     private val context: Context // Context to handle click events
-) : RecyclerView.Adapter<HotelAdapter.HotelViewHolder>() {
+) : RecyclerView.Adapter<CityListAdapter.HotelViewHolder>() {
 
-    private var filteredList: List<Hotel> = hotelList // Filtered list for search functionality
+    private var filteredList: List<CityListModel> = hotelList // Filtered list for search functionality
 
     // Creates ViewHolder for each item in the RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelViewHolder {
@@ -36,7 +36,7 @@ class HotelAdapter(
     override fun getItemCount(): Int = filteredList.size
 
     // Updates the list when search results change
-    fun updateList(newList: List<Hotel>) {
+    fun updateList(newList: List<CityListModel>) {
         hotelList.clear()
         hotelList.addAll(newList)
         notifyDataSetChanged() // Refresh RecyclerView
@@ -50,7 +50,7 @@ class HotelAdapter(
         private val countryName: TextView = itemView.findViewById(R.id.countryName) // Country Name TextView
 
         // Binds hotel data to the ViewHolder
-        fun bind(hotel: Hotel) {
+        fun bind(hotel: CityListModel) {
             cityName.text = hotel.City // Set city name
             countryName.text = hotel.CountryName // Set country name
 
