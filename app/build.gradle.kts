@@ -16,6 +16,19 @@ android {
         dataBinding=true
     }
 
+    sourceSets {
+        getByName("main") {
+            res {
+                srcDirs(
+
+                    "src\\main\\res\\layout\\hotels",
+
+                    )
+            }
+        }
+    }
+
+
     defaultConfig {
         applicationId = "com.justpe.justpy1"
         minSdk = 24

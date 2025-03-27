@@ -8,9 +8,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
+        <LinearLayout
+            android:id="@+id/top_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/gray_300"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageButton
+                android:id="@+id/backbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/back"
+                android:src="@drawable/img_arrow_left" />
+
+            <TextView
+                android:id="@+id/searchHotel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Hotel Search"
+                android:textAlignment="center"
+                android:textColor="@color/blue_gray_50"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:verticalScrollbarPosition="defaultPosition">
 
             <LinearLayout
@@ -22,35 +52,6 @@
                 android:orientation="vertical"
                 tools:context=".HotelDetailScreen.HotelDetails">
 
-                <LinearLayout
-                    android:id="@+id/top_bar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/gray_300"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageButton
-                        android:id="@+id/backbtn"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:contentDescription="@string/back"
-                        android:src="@drawable/img_arrow_left" />
-
-                    <TextView
-                        android:id="@+id/searchHotel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="Hotel Search"
-                        android:textAlignment="center"
-                        android:textColor="@color/blue_gray_50"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
 
                 <com.denzcoskun.imageslider.ImageSlider
                     android:id="@+id/imageSlide"
@@ -296,7 +297,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="30dp"
-                    android:background="@drawable/rectangle_bg_white_a800_4c_radius_82"
+                    android:background="@drawable/rectangle_bg_gray_900_03_radius_58"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -304,20 +305,19 @@
                         android:id="@+id/btRoom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:backgroundTint="#2196F3"
+                        android:layout_marginLeft="5dp"
+                        android:backgroundTint="@color/white_A700"
                         android:text="Room"
                         android:textColor="@color/blue_gray_50"
-                        app:cornerRadius="50dp"
-                        app:iconTint="#03A9F4" />
+                        app:cornerRadius="50dp" />
 
                     <Button
                         android:id="@+id/btOverView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:backgroundTint="#B2FFFFFF"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="@color/white_A700"
                         android:text="Overview"
                         android:textColor="@color/blue_gray_50"
                         app:cornerRadius="50dp" />
@@ -326,7 +326,8 @@
                         android:id="@+id/btDetails"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/white"
+                        android:layout_marginRight="5dp"
+                        android:backgroundTint="@color/white_A700"
                         android:text="Details"
                         android:textColor="@color/blue_gray_50"
                         app:cornerRadius="50dp" />
@@ -336,13 +337,55 @@
                 <FrameLayout
                     android:id="@+id/frameLayout"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:background="@color/blue_500" />
+                <LinearLayout
+                    android:id="@+id/bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/blue_gray_400"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:layout_margin="@dimen/_5pxh"
+                        android:orientation="vertical"
+                        android:layout_weight="1">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rs. 2000"
+                            android:textColor="@color/colorBackgroundPrimary"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+Rs 701.00 Taxes &amp; free"
+                            android:textColor="@color/colorBackgroundPrimary" />
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:backgroundTint="@color/orange_300"
+                        android:paddingStart="@dimen/_40pxh"
+                        android:paddingEnd="@dimen/_40pxh"
+                        android:paddingTop="@dimen/_12pxh"
+                        android:paddingBottom="@dimen/_12pxh"
+                        android:text="Continue"
+                        android:textSize="22sp"
+                        app:cornerRadius="@dimen/_30pxh" />
+                </LinearLayout>
             </LinearLayout>
 
         </ScrollView>
+
 
 
     </LinearLayout>
