@@ -41,7 +41,8 @@ class SearchHotel : AppCompatActivity() {
             Log.e("SharedPreferences", "Empty list")
         }
 
-        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object :
+            android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }

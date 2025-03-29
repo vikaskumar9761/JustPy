@@ -205,6 +205,7 @@
             app:cardElevation="2dp">
 
             <LinearLayout
+                android:id="@+id/Adults"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rectangle_bg_gray_100_radius_2"
@@ -217,6 +218,7 @@
                     android:text="Guest &amp; Rooms" />
 
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2 Adults, 1 Room"

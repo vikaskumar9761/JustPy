@@ -14,5 +14,6 @@ data class hotelListModel(
         val rating: String ,//Rating of hotel
         val SurchargeTotal:String,
         val TotalPrice:String,
+        val EMTCommonID: String,
     )
 }

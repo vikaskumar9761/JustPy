@@ -79,6 +79,7 @@ class HotelListAdapter(
                     putExtra("address", hotel.address)
                     putExtra("rating", hotel.rating)
                     putExtra("price", hotel.TotalPrice)
+                    putExtra("EMTCommonID", hotel.EMTCommonID)
                     putStringArrayListExtra("imageUrls", ArrayList(imageUrls))                }
                 context.startActivity(intent)
             }
