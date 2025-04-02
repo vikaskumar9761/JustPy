@@ -136,6 +136,7 @@
                 android:layout_weight="1">
 
                 <LinearLayout
+                    android:id="@+id/btnCheckIn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_bg_gray_100_radius_2"
@@ -148,6 +149,7 @@
                         android:text="Check-In" />
 
                     <TextView
+                        android:id="@+id/tvCheckIn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
@@ -170,6 +172,7 @@
 
                 <!-- Similar layout for Check-Out date -->
                 <LinearLayout
+                    android:id="@+id/btnCheckOut"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rectangle_bg_gray_100_radius_2"
@@ -182,6 +185,7 @@
                         android:text="Check-In" />
 
                     <TextView
+                        android:id="@+id/tvCheckOut"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20"
@@ -218,10 +222,10 @@
                     android:text="Guest &amp; Rooms" />
 
                 <TextView
-
+                    android:id="@+id/tvAdults"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 Adults, 1 Room"
+                    android:text="0 Adults, 0 Room"
                     android:textColor="@color/blue_gray_50"
                     android:textSize="18sp"
                     android:textStyle="bold" />

@@ -1,6 +1,6 @@
 package com.justpe.justpy1.city_search_hotel.HotelModel
 
-data class RoomDetailsModel(
+data class UserDetailsModel(
     val rooms: Int,
     val adults: Int,
     val children: Int,
