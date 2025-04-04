@@ -42,15 +42,42 @@
 
                 </androidx.cardview.widget.CardView>
 
-                <TextView
-                    android:id="@+id/imgName"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="Twin Room"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/imgName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Twin Room"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvRoomType"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Room Type"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTotalRoomPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Discount"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
             </LinearLayout>
 
             <!-- Room Name -->
@@ -69,9 +96,8 @@
 
                 <RadioButton
                     android:id="@+id/rbRoomOnly"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:checked="true"
                     android:text="Room Only"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -93,14 +119,23 @@
                         android:textColor="@color/black"
                         android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/tvRoomPrice1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="8dp"
-                        android:text="₹ 3,427 \n + ₹701 Taxes &amp; fees"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                   <LinearLayout
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical"
+                       android:gravity="start"
+                       >
+                       <TextView
+                           android:id="@+id/tvRoomPrice"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:paddingTop="8dp"
+                           android:text="₹ 3,427 "
+                           android:textSize="16sp"
+                           android:textStyle="bold" />
+
+
+                   </LinearLayout>
                 </LinearLayout>
 
                 <View
@@ -111,15 +146,29 @@
 
             </RadioGroup>
 
-            <RadioGroup
-                android:id="@+id/radioGroupOptions1"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="start">
+
+                <TextView
+                    android:id="@+id/tvBookingPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BookingPolicy"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tvCancellationPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CancellationPolicy"
+                    android:textStyle="bold"/>
 
 
-                <!-- Price and Fees -->
-            </RadioGroup>
+            </LinearLayout>
+
 
         </LinearLayout>
 

@@ -1,18 +1,20 @@
 package com.justpe.justpy1.city_search_hotel.HotelAdapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.justpe.justpy1.R
 import com.justpe.justpy1.databinding.ItemDetailsBinding
-import com.justpe.justpy1.city_search_hotel.HotelModel.DetailsModel
 import com.justpe.justpy1.city_search_hotel.HotelModel.RoomDetailsResponse
 
 class RoomAdapter(
-    private var roomList: List<DetailsModel.RoomImage> = emptyList(),
-    private var roomList1: List<RoomDetailsResponse.AvailableRoom> = emptyList()
+    private var roomList: List<RoomDetailsResponse.AvailableRoom> = emptyList(),
+    private val onRoomSelected: (String) -> Unit
 ) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+
+    private var selectedPosition: Int = 0
 
     class RoomViewHolder(val binding: ItemDetailsBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,43 +23,57 @@ class RoomAdapter(
         return RoomViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        if (position < roomList.size) {
-            // 🔹 Room Image Data Bind
-            val room = roomList[position]
-           // holder.binding.imgName.text = (room.EngineType ?: "N/A").toString()
-//            Glide.with(holder.itemView.context)
-//                .load(room.Url)
-//                .placeholder(com.justpe.justpy1.R.drawable.adult)
-//                .into(holder.binding.ivRoomImage)
+    override fun onBindViewHolder(holder: RoomViewHolder, @SuppressLint("RecyclerView") position: Int) {
+        val room = roomList[position]
+
+        holder.binding.imgName.text = room.roomType
+        holder.binding.tvRoomDetails1.text = "Meal: ${room.Meal ?: "No Name"}"
+        holder.binding.tvRoomType.text = "Room Type: ${room.BedType ?: "N/A"}"
+        holder.binding.tvTotalRoomPrice.text = "Hotel Discount: ${room.HotelDiscount ?: "N/A"}"
+        holder.binding.tvRoomPrice.text = "Price: ${room.Price?: "N/A"} USD"
+        holder.binding.tvBookingPolicy.text = "BookingPolicy: ${room.BookingPolicy ?: "N/A"}"
+        holder.binding.tvCancellationPolicy.text = "CancellationPolicy: ${room.CancellationPolicy ?: "N/A"}"
+
+        // ✅ Properly manage RadioButton selection state
+        holder.binding.rbRoomOnly.setOnCheckedChangeListener(null) // reset old listener
+        holder.binding.rbRoomOnly.isChecked = (position == selectedPosition)
+
+        // ✅ Click on entire item
+        holder.itemView.setOnClickListener {
+            holder.binding.rbRoomOnly.performClick()
         }
 
-        if (position < roomList1.size) {
-            // 🔹 Hotel Name & Price Bind
-            val room1 = roomList1[position]
-            holder.binding.imgName.setText("${room1.roomType}")
-            holder.binding.tvRoomDetails1.text = room1.Meal ?: "No Name"
-            holder.binding.tvRoomPrice1.text = "Price: ${room1.Price ?: "N/A"} USD"
-            Glide.with(holder.itemView.context)
-                .load(room1.roomImage)
-                .placeholder(R.drawable.ic_home_black_24dp)
-                .into(holder.binding.ivRoomImage)
+        // ✅ When user checks the radio button
+        holder.binding.rbRoomOnly.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val previousSelected = selectedPosition
+                selectedPosition = position
+                notifyItemChanged(previousSelected)
+                notifyItemChanged(selectedPosition)
+
+                onRoomSelected((room.NP ?: "0").toString())
+            }
         }
+
+        // ✅ Load Image
+        Glide.with(holder.itemView.context)
+            .load(room.roomImage)
+            .placeholder(R.drawable.ic_home_black_24dp)
+            .into(holder.binding.ivRoomImage)
     }
 
-    override fun getItemCount(): Int {
-        return maxOf(roomList.size, roomList1.size)  // 🔹 Maximum list size return karega
-    }
 
-    // 🔹 Update Room Image List
-    fun updateList(newList: List<DetailsModel.RoomImage>) {
-        roomList = newList
-        notifyDataSetChanged()
-    }
+    override fun getItemCount(): Int = roomList.size
 
-    // 🔹 Update Hotel List
     fun updateList1(newList1: List<RoomDetailsResponse.AvailableRoom>) {
-        roomList1 = newList1
+        roomList = newList1
+        selectedPosition = 0  // Select first by default
+
+        // Trigger callback with first item
+        if (roomList.isNotEmpty()) {
+            onRoomSelected((roomList[0].NP ?: roomList[0].Price?: "0").toString())
+        }
+
         notifyDataSetChanged()
     }
 }
